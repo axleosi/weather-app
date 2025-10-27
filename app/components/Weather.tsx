@@ -1,29 +1,12 @@
 'use client'
 import { ReactElement, JSXElementConstructor, ReactNode, ReactPortal, Key } from "react";
 import { useAppContext } from "../context/AppContext"
-import Skeleton from "./Skeleton";
 
 
 const Weather = () => {
     const { locationData, weatherData, units } = useAppContext();
-    if (!weatherData) {
-    return (
-      <div className="w-full h-full flex flex-col gap-3">
-        <Skeleton className="h-[180px] w-full" /> {/* top section */}
-        <div className="flex flex-wrap justify-between gap-2">
-          <Skeleton className="h-20 w-[48%] sm:w-[23%]" />
-          <Skeleton className="h-20 w-[48%] sm:w-[23%]" />
-          <Skeleton className="h-20 w-[48%] sm:w-[23%]" />
-          <Skeleton className="h-20 w-[48%] sm:w-[23%]" />
-        </div>
-        <div className="mt-3 flex gap-2 overflow-x-auto pb-2">
-          {Array.from({ length: 7 }).map((_, i) => (
-            <Skeleton key={i} className="h-28 w-20 shrink-0" />
-          ))}
-        </div>
-      </div>
-    );
-  }
+    if (!weatherData) return null;
+
 
     const { hourly, daily } = weatherData;
     const feelsLike = Math.round(Number(hourly?.temperature_2m?.[0]));

@@ -63,6 +63,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   // 🔹 Step 1: Fetch location from name
   const fetchLocationData = async (placeName: string) => {
     try {
+      setLoading(true);
       const res = await axios.get(
         `https://geocoding-api.open-meteo.com/v1/search?name=${placeName}`
       );
@@ -84,6 +85,8 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
       }
     } catch (err) {
       console.error("❌ Error fetching location:", err);
+    }finally {
+      setLoading(false); // stop loading
     }
   };
 

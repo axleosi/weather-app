@@ -2,6 +2,7 @@
 import Search from "./components/Search";
 import Main from "./components/Main";
 import { useAppContext } from "./context/AppContext";
+import Skeleton from "./components/Skeleton";
 
 export default function Home() {
   const { place, locationData, weatherData, submittedSearch, loading } = useAppContext();
@@ -23,13 +24,20 @@ export default function Home() {
       )}
 
       {showLoading && (
-        <div className="flex flex-col justify-center items-center h-40 gap-2">
-          <p className="text-gray-300 text-xl font-semibold animate-pulse">
-            Loading weather data...
-          </p>
-          {/* Optional: Skeleton silhouettes for Weather & Hourly */}
-          <div className="w-full h-48 bg-gray-700/30 rounded-xl animate-pulse"></div>
-        </div>
+        <div className="w-full h-full flex flex-col gap-3">
+            <Skeleton className="h-[180px] w-full" /> {/* top section */}
+            <div className="flex flex-wrap justify-between gap-2">
+              <Skeleton className="h-20 w-[48%] sm:w-[23%]" />
+              <Skeleton className="h-20 w-[48%] sm:w-[23%]" />
+              <Skeleton className="h-20 w-[48%] sm:w-[23%]" />
+              <Skeleton className="h-20 w-[48%] sm:w-[23%]" />
+            </div>
+            <div className="mt-3 flex gap-2 overflow-x-auto pb-2">
+              {Array.from({ length: 7 }).map((_, i) => (
+                <Skeleton key={i} className="h-28 w-20 shrink-0" />
+              ))}
+            </div>
+          </div>
       )}
 
       {showNoResults && (
