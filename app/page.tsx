@@ -25,6 +25,7 @@ export default function Home() {
 
       {showLoading && (
         <div className="w-full h-full flex flex-col gap-3">
+          <p className="mt-3 text-2xl font-extrabold text-gray-100 text-center">Data loading. Please wait.</p>
             <Skeleton className="h-[180px] w-full" /> {/* top section */}
             <div className="flex flex-wrap justify-between gap-2">
               <Skeleton className="h-20 w-[48%] sm:w-[23%]" />
